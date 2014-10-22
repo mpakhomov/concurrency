@@ -14,6 +14,8 @@ import java.util.concurrent.Executors;
 public class WaitingQueue<E> {
     LinkedList<E> q = new LinkedList<E>();  // Where objects are stored
 
+    private final CountDownLatch latch = new CountDownLatch(2);
+
     public synchronized void push(E o) {
         q.add(o);         // Append the object to the end of the list
         this.notifyAll(); // Tell waiting threads that data is ready
@@ -72,22 +74,33 @@ public class WaitingQueue<E> {
         ExecutorService executor = Executors.newFixedThreadPool(2);
         final WaitingQueue<Integer> queue = new WaitingQueue<Integer>();
 
-        executor.execute(new Task("ConsumerThread", new QueueOperations() {
-            @Override
-            public void doSomethingWithTheQueue() {
-                WaitingQueue.this.logMessage("Blocked until there is some data in the queue");
-                WaitingQueue.this.logMessage("Retrieved: " + queue.pop());
-            }
-        }));
-
         executor.execute(new Task("ProducerThread", new QueueOperations() {
             @Override
             public void doSomethingWithTheQueue() {
                 WaitingQueue.this.logMessage("pushing a value to the queue");
                 queue.push(2);
+                latch.countDown();
             }
         }));
 
+
+        executor.execute(new Task("ConsumerThread", new QueueOperations() {
+            @Override
+            public void doSomethingWithTheQueue() {
+                WaitingQueue.this.logMessage("Blocked until there is some data in the queue");
+                WaitingQueue.this.logMessage("Retrieved: " + queue.pop());
+                latch.countDown();
+            }
+        }));
+
+        logMessage("Awaiting spawned threads");
+        try {
+            latch.await();
+        } catch (InterruptedException e) {
+            logMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        logMessage("Threads have been finished working");
         //executor.shutdown();
         logMessage("about to run executor.shutdownNow");
         executor.shutdownNow();
