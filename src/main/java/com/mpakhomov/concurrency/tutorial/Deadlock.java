@@ -1,8 +1,6 @@
 package com.mpakhomov.concurrency.tutorial;
 
-/**
- * @author mpakhomov
- */
+
 public class Deadlock {
 
     static class Friend {
