@@ -24,14 +24,26 @@ public class Safelock {
             Boolean yourLock = false;
             try {
                 myLock = lock.tryLock();
+                if (myLock) {
+                    System.out.println(this.getName() + " obtained a lock on " + this.getName());
+                } else {
+                    System.out.println(this.getName() + " failed to obtain a lock on " + bower.getName());
+                }
                 yourLock = bower.lock.tryLock();
+                if (yourLock) {
+                    System.out.println(this.getName() + " obtained a lock on " + bower.getName());
+                } else {
+                    System.out.println(this.getName() + " failed to obtain a lock on " + bower.getName());
+                }
             } finally {
                 if (! (myLock && yourLock)) {
                     if (myLock) {
                         lock.unlock();
+                        System.out.println(this.getName() + " released a lock on " + this.getName());
                     }
                     if (yourLock) {
                         bower.lock.unlock();
+                        System.out.println(this.getName() + " released a lock on " + bower.getName());
                     }
                 }
             }
