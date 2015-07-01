@@ -76,7 +76,7 @@ public class NotifyvsNotifyAll {
                     + " is going to notify all or one thread waiting on this object");
 
             go = true; //making condition true for waiting thread
-            notify(); // only one out of three waiting thread WT1, WT2,WT3 will woke up
+            notify(); // only one out of three waiting thread WT1, WT2,WT3 will wake up
             //notifyAll(); // all waiting thread  WT1, WT2,WT3 will woke up
         }
 

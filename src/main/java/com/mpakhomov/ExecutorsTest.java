@@ -52,7 +52,7 @@ class SingleThreadExecutor extends Thread implements Executor {
     }
 }
 
-public class Executors {
+public class ExecutorsTest {
 
     private final String closure = "closure";
 
@@ -83,6 +83,6 @@ public class Executors {
     }
 
     public static void main(String[] args) {
-        new Executors().doIt();
+        new ExecutorsTest().doIt();
     }
 }
