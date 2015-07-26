@@ -7,12 +7,12 @@ import java.util.logging.Logger;
  * Java program to demonstrate How to use notify and notifyAll method in Java and
  * How notify and notifyAll method notifies thread, which thread gets woke up etc.
  */
-public class NotifyvsNotifyAll {
+public class NotifyVsNotifyAll {
 
     private volatile boolean go = false;
 
     public static void main(String args[]) throws InterruptedException {
-        final NotifyvsNotifyAll test = new NotifyvsNotifyAll();
+        final NotifyVsNotifyAll test = new NotifyVsNotifyAll();
 
         Runnable waitTask = new Runnable(){
 
@@ -21,7 +21,7 @@ public class NotifyvsNotifyAll {
                 try {
                     test.shouldGo();
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(NotifyvsNotifyAll.class.getName()).
+                    Logger.getLogger(NotifyVsNotifyAll.class.getName()).
                             log(Level.SEVERE, null, ex);
                 }
                 System.out.println(Thread.currentThread() + " finished Execution");
