@@ -1,3 +1,5 @@
+package com.mpakhomov;
+
 /**
  * @author mpakhomov
  * @since: 6/16/2015

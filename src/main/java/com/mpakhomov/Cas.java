@@ -3,8 +3,8 @@ package com.mpakhomov;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @author: mpakhomov
- * @since: 7/8/14
+ * @author mpakhomov
+ * @since 7/8/14
  */
 public class Cas {
     AtomicInteger counter = new AtomicInteger(0);
