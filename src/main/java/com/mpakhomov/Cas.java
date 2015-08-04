@@ -52,9 +52,9 @@ public class Cas {
     private static Unsafe getUnsafe() {
         try {
 
-            Field singleoneInstanceField = Unsafe.class.getDeclaredField("theUnsafe");
-            singleoneInstanceField.setAccessible(true);
-            return (Unsafe) singleoneInstanceField.get(null);
+            Field singletoneInstanceField = Unsafe.class.getDeclaredField("theUnsafe");
+            singletoneInstanceField.setAccessible(true);
+            return (Unsafe) singletoneInstanceField.get(null);
 
         } catch (Exception e) {
             e.printStackTrace();
